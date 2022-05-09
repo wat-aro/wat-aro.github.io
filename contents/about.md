@@ -4,9 +4,9 @@ published: '2022-05-08'
 description: About me
 ---
 
-# About
+## About
 
-## wat-aro :+1:
+### wat-aro :+1:
 
 - 2016-09 - 現在 永和システムマネジメントアジャイル事業部
 

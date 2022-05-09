@@ -1,5 +1,5 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
-import { Layout } from '../../components/Layout';
+import { MarkDownLayout } from '../../components/MarkDownLayout';
 import { getPostBySlug } from '../../lib/api';
 import { markdownToHtml } from '../../lib/markdownToHtml';
 
@@ -31,9 +31,9 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({
 
 const Post: React.FC<Props> = ({ content }) => {
   return (
-    <Layout>
+    <MarkDownLayout>
       <div dangerouslySetInnerHTML={{ __html: content }} />
-    </Layout>
+    </MarkDownLayout>
   );
 };
 

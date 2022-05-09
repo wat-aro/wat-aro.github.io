@@ -5,9 +5,8 @@ const Home: NextPage = () => {
   return (
     <>
       <Head>
-        <title>wat-aro.dev</title>
+        <title>(wat-aro)</title>
         <meta name="description" content="wat-aro のサイト" />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main className="py-4">Contents</main>
