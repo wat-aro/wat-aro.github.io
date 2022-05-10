@@ -12,6 +12,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 type Props = {
+  title: string;
+  published: string;
+  tags: string[];
   content: string;
 };
 
@@ -26,19 +29,22 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({
   const content = await markdownToHtml(post.content);
 
   return {
-    props: { content },
+    props: { ...post.data, content },
   };
 };
 
-const Post: React.FC<Props> = ({ content }) => {
+const Post: React.FC<Props> = ({ title, published, tags, content }) => {
   return (
     <>
       <Head>
-        <title>(wat-aro)</title>
+        <title>(wat-aro) | {title}</title>
       </Head>
-      <MarkDownLayout>
-        <div dangerouslySetInnerHTML={{ __html: content }} />
-      </MarkDownLayout>
+      <MarkDownLayout
+        title={title}
+        published={published}
+        tags={tags}
+        content={content}
+      />
     </>
   );
 };
