@@ -1,12 +1,22 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
-import { MarkDownLayout } from '../../components/MarkDownLayout';
-import { getPostBySlug } from '../../lib/api';
+import { join } from 'path';
+import { MarkDownPost } from '../../components/MarkDownPost';
+import { getPostByPath, getPostBySlug } from '../../lib/api';
+import { getFiles } from '../../lib/getFiles';
 import { markdownToHtml } from '../../lib/markdownToHtml';
 
+const contentsDir = join(process.cwd(), 'contents');
+
 export const getStaticPaths: GetStaticPaths = async () => {
+  const postsDir = join(contentsDir, 'posts');
+  const files = await getFiles(postsDir);
+  const slugs = files.map((file) =>
+    file.split('/').slice(-1)[0].replace(/\.md$/, '')
+  );
+
   return {
-    paths: [{ params: { slug: 'about' } }],
+    paths: slugs.map((slug) => ({ params: { slug } })),
     fallback: true,
   };
 };
@@ -39,7 +49,7 @@ const Post: React.FC<Props> = ({ title, published, tags, content }) => {
       <Head>
         <title>(wat-aro) | {title}</title>
       </Head>
-      <MarkDownLayout
+      <MarkDownPost
         title={title}
         published={published}
         tags={tags}

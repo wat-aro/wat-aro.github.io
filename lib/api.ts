@@ -2,12 +2,20 @@ import fs from 'fs';
 import { join } from 'path';
 import matter from 'gray-matter';
 
-const contentDirectory = join(process.cwd(), 'contents');
+const contentDirectory = join(process.cwd(), 'contents', 'posts');
 
 type Data = {
   title: string;
   published: string;
   tags: string[];
+};
+
+export const getPostByPath = (
+  path: string
+): { data: Data; content: string } => {
+  const fileContents = fs.readFileSync(path, 'utf-8');
+  const { data, content } = matter(fileContents);
+  return { data, content } as { data: Data; content: string };
 };
 
 export const getPostBySlug = (

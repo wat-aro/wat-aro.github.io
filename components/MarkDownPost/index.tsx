@@ -18,7 +18,7 @@ const Tag: React.FC<{ tag: string }> = ({ tag }) => {
   );
 };
 
-export const MarkDownLayout: React.FC<Props> = ({
+export const MarkDownPost: React.FC<Props> = ({
   title,
   published,
   tags,
@@ -31,9 +31,7 @@ export const MarkDownLayout: React.FC<Props> = ({
         <nav className="flex mt-7 items-start text-gray-500">
           <div className="mr-2 mb-4">{published}</div>
           <div className="flex flex-nowrap max-w-full overflow-x-auto">
-            {tags.map((tag) => (
-              <Tag tag={tag} key={tag} />
-            ))}
+            {tags && tags.map((tag) => <Tag tag={tag} key={tag} />)}
           </div>
         </nav>
 

@@ -1,10 +1,13 @@
 ---
 title: About
 published: '2022-05-08'
-description: About me
+tags:
+  - JavaScript
+  - Haskell
+  - Rust
 ---
 
-## About
+## 自己紹介
 
 ### wat-aro :+1:
 
@@ -23,7 +26,37 @@ description: About me
 - [パイプライン演算子](https://wat-aro.dev/pipeline-operator) in 2019 年 6 月みんなの時間 2019/06/20
 
 ```js
-function id(arg) {
-  return arg;
+function foo(bar) {
+  var a = 42,
+    b = 'Prism';
+  return a + bar(b);
+}
+```
+
+```haskell
+(|>) :: a -> (a -> b) -> b
+a |> f = f a
+```
+
+```rust
+use std::{sync::{Arc, Barrier}, thread};
+
+fn main() {
+    let mut v = Vec::new();
+
+    let barrier = Arc::new(Barrier::new(10));
+
+    for i in 0..10 {
+        let b = barrier.clone();
+        let th = thread::spawn(move || {
+            b.wait();
+            println!("finished barrier{}", i);
+        });
+        v.push(th);
+    }
+
+    for th in v {
+        th.join().unwrap();
+    }
 }
 ```
