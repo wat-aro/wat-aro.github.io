@@ -4,7 +4,7 @@ import { PropsWithChildren } from 'react';
 type Props = {
   title: string;
   published: string;
-  tags: string[];
+  tags?: string[];
   content: string;
 };
 

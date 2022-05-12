@@ -24,7 +24,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 type Props = {
   title: string;
   published: string;
-  tags: string[];
+  tags?: string[];
   content: string;
 };
 
@@ -35,7 +35,7 @@ type Params = {
 export const getStaticProps: GetStaticProps<Props, Params> = async ({
   params,
 }) => {
-  const post = getPostBySlug(params!.slug);
+  const post = getPostBySlug(`contents/posts/${params!.slug}.md`);
   const content = await markdownToHtml(post.content);
 
   return {
