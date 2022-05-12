@@ -30,7 +30,7 @@ const Posts: React.FC<Props> = ({ posts }) => {
       ? 1
       : -1;
   });
-  console.log(posts.map((post) => post.data));
+
   return <div>Posts</div>;
 };
 
