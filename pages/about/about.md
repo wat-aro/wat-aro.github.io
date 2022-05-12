@@ -1,6 +1,6 @@
 ---
 title: About
-published: '2022-05-08'
+published: ''
 ---
 
 ## 自己紹介
