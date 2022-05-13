@@ -1,6 +1,6 @@
 ---
 title: Ruby に型をつけるお気持ち
-published: '2020-011-15'
+published: '2020-01-15'
 ---
 
 # Ruby に型をつけるお気持ち

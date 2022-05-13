@@ -5,7 +5,7 @@ import 'zenn-content-css';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <div className="py-0 px-8 min-h-screen m-auto flex flex-col items-center">
+    <div className="py-0 md:px-8 min-h-screen flex flex-col items-center">
       <Header />
       <Component {...pageProps} />
     </div>
