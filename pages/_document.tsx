@@ -20,7 +20,6 @@ export default function Document() {
     <Html lang="ja">
       <Head>
         <Script src="kazutaro.js" />
-        <meta hoge="hoge" />
         <GoogleTagManager />
         <link rel="icon" href="/images/favicon.ico" />
       </Head>
