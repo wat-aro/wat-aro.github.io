@@ -1,5 +1,4 @@
 import { Html, Head, Main, NextScript } from 'next/document';
-import Script from 'next/script';
 
 const googleTagManagerId = 'GTM-MW6D56L';
 const isProduction = process.env.NODE_ENV === 'production';

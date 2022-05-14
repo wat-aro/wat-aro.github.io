@@ -29,7 +29,7 @@ type Props = {
   posts: Post[];
 };
 
-const Home: React.FC<Props> = ({ posts }) => {
+const Home: NextPage<Props> = ({ posts }) => {
   posts.sort((x, y) => {
     return new Date(x.data.published).getTime() <
       new Date(y.data.published).getTime()
