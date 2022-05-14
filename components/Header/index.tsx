@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { SITENAME } from '../../lib/constant';
@@ -37,9 +38,19 @@ export const Header: React.FC = () => {
 
   return (
     <div className="sticky top-0 bg-white w-full h-16 flex flex-row justify-between items-center px-4 border-b-2">
-      <div className="flex items-center font-midium text-3xl h-full">
-        <Link href="/">{SITENAME}</Link>
-      </div>
+      <Link href="/">
+        <a>
+          <div className="flex items-center font-midium text-3xl h-full font-bold gap-4">
+            <Image
+              className="rounded-full"
+              src="/images/profile.jpg"
+              width="48"
+              height="48"
+            />
+            {SITENAME}
+          </div>
+        </a>
+      </Link>
       <Menu currentPath={router.asPath.split('/')[1]} />
     </div>
   );
