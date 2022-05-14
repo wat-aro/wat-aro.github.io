@@ -43,7 +43,7 @@ const Posts: React.FC<Props> = ({ posts }) => {
         <title>Posts | (wat-aro)</title>
       </Head>
       <div className="flex md:justify-center justify-between w-full">
-        <div className="flex flex-col md:w-9/12 w-full py-4 px-4">
+        <div className="flex flex-col md:max-w-4xl w-full py-4 px-4">
           <h1 className="text-3xl mb-4">Posts</h1>
           {posts.map((post) => (
             <Link href={`/posts/${post.slug}`} key={post.slug}>
