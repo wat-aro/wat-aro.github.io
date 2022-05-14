@@ -47,7 +47,7 @@ const Post: React.FC<Props> = ({ title, published, tags, content }) => {
   return (
     <>
       <Head>
-        <title>(wat-aro) | {title}</title>
+        <title>{title} | (wat-aro)</title>
       </Head>
       <MarkDownPost
         title={title}

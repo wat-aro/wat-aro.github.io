@@ -40,7 +40,7 @@ const Posts: React.FC<Props> = ({ posts }) => {
   return (
     <>
       <Head>
-        <title>(wat-aro) | Posts</title>
+        <title>Posts | (wat-aro)</title>
       </Head>
       <div className="flex md:justify-center justify-between w-full">
         <div className="flex flex-col md:w-9/12 w-full py-4 px-4">

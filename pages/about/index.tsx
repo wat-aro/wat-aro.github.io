@@ -24,7 +24,7 @@ const About: NextPage<Props> = ({ title, published, tags, content }) => {
   return (
     <>
       <Head>
-        <title>(wat-aro) | about</title>
+        <title>about | (wat-aro)</title>
       </Head>
       <MarkDownPost
         title={title}
