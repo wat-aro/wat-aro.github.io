@@ -1,10 +1,8 @@
 import { Html, Head, Main, NextScript } from 'next/document';
 import Script from 'next/script';
 
-const googleTagManagerId =
-  process.env.NODE_ENV === 'production'
-    ? process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID
-    : '';
+const googleTagManagerId = process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID;
+const isProduction = process.env.NODE_ENV === 'production';
 
 const GoogleTagManager: React.FC = () => {
   return (
@@ -22,8 +20,7 @@ export default function Document() {
   return (
     <Html lang="ja">
       <Head>
-        <Script src="kazutaro.js" />
-        <GoogleTagManager />
+        {isProduction && <GoogleTagManager />}
         <link rel="icon" href="/images/favicon.ico" />
       </Head>
       <body>
@@ -31,7 +28,7 @@ export default function Document() {
           dangerouslySetInnerHTML={{
             __html: `
             <iframe
-              src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
+              src="https://www.googletagmanager.com/ns.html?id=GTM-MW6D56L"
               height="0"
               width="0"
               style="display:none;visibility:hidden"
