@@ -25,11 +25,11 @@ export const MarkDownPost: React.FC<Props> = ({
   content,
 }) => {
   return (
-    <article className="flex justify-center container">
-      <div className="w-9/12 py-4">
+    <article className="flex max-w-4xl w-full">
+      <div className="py-4">
+        <div className="mr-2 text-xs font-bold">{published}</div>
         <h1 className="font-bold text-3xl text-black">{title}</h1>
         <nav className="flex mt-7 items-start text-gray-500">
-          <div className="mr-2 mb-4">{published}</div>
           <div className="flex flex-nowrap max-w-full overflow-x-auto">
             {tags && tags.map((tag) => <Tag tag={tag} key={tag} />)}
           </div>
