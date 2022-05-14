@@ -41,11 +41,12 @@ export const Header: React.FC = () => {
       <Link href="/">
         <a>
           <div className="flex items-center font-midium text-3xl h-full font-bold gap-4">
-            <Image
+            <img
               className="rounded-full"
               src="/images/profile.jpg"
               width="48"
               height="48"
+              alt="profile image"
             />
             {SITENAME}
           </div>
