@@ -25,7 +25,7 @@ export const MarkDownPost: React.FC<Props> = ({
 }) => {
   return (
     <article className="flex max-w-4xl w-full">
-      <div className="py-4">
+      <div className="py-4 w-full">
         <div className="mr-2 text-xs font-bold">{published}</div>
         <h1 className="font-bold text-3xl text-black">{title}</h1>
         <nav className="flex mt-7 items-start text-gray-500">
