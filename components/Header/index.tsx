@@ -37,7 +37,7 @@ export const Header: React.FC = () => {
   const router = useRouter();
 
   return (
-    <div className="sticky top-0 bg-white w-full h-16 flex flex-row justify-between items-center px-4 border-b-2">
+    <div className="top-0 bg-white w-full h-16 flex flex-row justify-between items-center px-4 border-b-2">
       <Link href="/">
         <a>
           <div className="flex items-center font-midium text-3xl h-full font-bold gap-4">
