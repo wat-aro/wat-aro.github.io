@@ -13,7 +13,7 @@ type Props = {
 };
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-  const post = getPostBySlug('pages/about/about.md');
+  const post = getPostBySlug('contents/about.md');
   const content = await markdownToHtml(post.content);
 
   return {
