@@ -1,6 +1,7 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
 import { join } from 'path';
+import { Layout } from '../../components/Layout';
 import { MarkDownPost } from '../../components/MarkDownPost';
 import { getPostByPath, getPostBySlug } from '../../lib/api';
 import { getFiles } from '../../lib/getFiles';
@@ -49,12 +50,14 @@ const Post: React.FC<Props> = ({ title, published, tags, content }) => {
       <Head>
         <title>{title} | (wat-aro)</title>
       </Head>
-      <MarkDownPost
-        title={title}
-        published={published}
-        tags={tags}
-        content={content}
-      />
+      <Layout>
+        <MarkDownPost
+          title={title}
+          published={published}
+          tags={tags}
+          content={content}
+        />
+      </Layout>
     </>
   );
 };

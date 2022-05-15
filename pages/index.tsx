@@ -2,6 +2,7 @@ import type { GetStaticProps, NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import { join } from 'path';
+import { Layout } from '../components/Layout';
 import { getPostByPath, PostData } from '../lib/api';
 import { getFiles } from '../lib/getFiles';
 
@@ -42,24 +43,20 @@ const Home: NextPage<Props> = ({ posts }) => {
       <Head>
         <title>(wat-aro)</title>
       </Head>
-      <div className="flex md:justify-center justify-between w-full">
-        <div className="flex flex-col md:max-w-4xl w-full py-4 px-4">
-          {posts.map((post) => (
-            <Link href={`/posts/${post.slug}`} key={post.slug}>
-              <a className="hover:border-b-2">
-                <div className="flex pt-2 pb-1 justify-between">
-                  <div className="text-xl md:w-5/6 w-9/12">
-                    {post.data.title}
-                  </div>
-                  <div className="text-gray-500 md:w-1/6 w-3/12 flex justify-end">
-                    {post.data.published}
-                  </div>
+      <Layout>
+        {posts.map((post) => (
+          <Link href={`/posts/${post.slug}`} key={post.slug}>
+            <a className="hover:border-b-2">
+              <div className="flex pt-2 pb-1 justify-between">
+                <div className="text-xl md:w-5/6 w-9/12">{post.data.title}</div>
+                <div className="text-gray-500 md:w-1/6 w-3/12 flex justify-end">
+                  {post.data.published}
                 </div>
-              </a>
-            </Link>
-          ))}
-        </div>
-      </div>
+              </div>
+            </a>
+          </Link>
+        ))}
+      </Layout>
     </>
   );
 };

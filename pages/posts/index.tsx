@@ -4,6 +4,7 @@ import { getFiles } from '../../lib/getFiles';
 import { getPostByPath, PostData } from '../../lib/api';
 import Link from 'next/link';
 import Head from 'next/head';
+import { Layout } from '../../components/Layout';
 
 export const getStaticProps: GetStaticProps = async () => {
   const contentsDir = join(process.cwd(), 'contents');
@@ -42,25 +43,21 @@ const Posts: React.FC<Props> = ({ posts }) => {
       <Head>
         <title>Posts | (wat-aro)</title>
       </Head>
-      <div className="flex md:justify-center justify-between w-full">
-        <div className="flex flex-col md:max-w-4xl w-full py-4 px-4">
-          <h1 className="text-3xl mb-4">Posts</h1>
-          {posts.map((post) => (
-            <Link href={`/posts/${post.slug}`} key={post.slug}>
-              <a className="hover:border-b-2">
-                <div className="flex pt-2 pb-1 justify-between">
-                  <div className="text-xl md:w-5/6 w-9/12">
-                    {post.data.title}
-                  </div>
-                  <div className="text-gray-500 md:w-1/6 w-3/12 flex justify-end">
-                    {post.data.published}
-                  </div>
+      <Layout>
+        <h1 className="text-3xl mb-4">Posts</h1>
+        {posts.map((post) => (
+          <Link href={`/posts/${post.slug}`} key={post.slug}>
+            <a className="hover:border-b-2">
+              <div className="flex pt-2 pb-1 justify-between">
+                <div className="text-xl md:w-5/6 w-9/12">{post.data.title}</div>
+                <div className="text-gray-500 md:w-1/6 w-3/12 flex justify-end">
+                  {post.data.published}
                 </div>
-              </a>
-            </Link>
-          ))}
-        </div>
-      </div>
+              </div>
+            </a>
+          </Link>
+        ))}
+      </Layout>
     </>
   );
 };

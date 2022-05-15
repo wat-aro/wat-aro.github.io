@@ -1,5 +1,6 @@
 import type { GetStaticProps, NextPage } from 'next';
 import Head from 'next/head';
+import { Layout } from '../../components/Layout';
 import { MarkDownPost } from '../../components/MarkDownPost';
 import { getPostBySlug } from '../../lib/api';
 import { markdownToHtml } from '../../lib/markdownToHtml';
@@ -26,12 +27,14 @@ const About: NextPage<Props> = ({ title, published, tags, content }) => {
       <Head>
         <title>about | (wat-aro)</title>
       </Head>
-      <MarkDownPost
-        title={title}
-        published={published}
-        tags={tags}
-        content={content}
-      />
+      <Layout>
+        <MarkDownPost
+          title={title}
+          published={published}
+          tags={tags}
+          content={content}
+        />
+      </Layout>
     </>
   );
 };
