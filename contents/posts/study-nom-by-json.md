@@ -1,5 +1,5 @@
 ---
-title: nom のお勉強
+title: json で nom のお勉強
 published: '2022/05/16'
 tags:
   - Rust
@@ -7,10 +7,11 @@ tags:
 ---
 
 旧ブログの `movable type` を `markdown` に変換したい。  
-まずは [nom](https://github.com/Geal/nom) でパースしようと思ったが Readme を読んでもいまいちしっくりこない。  
+[nom](https://github.com/Geal/nom) でパースしようと思ったが Readme を読んでもいまいちしっくりこない。  
+parsec と同じようにはできませんか。
 とりあえず練習がてら何かをパースしてみる。  
-仕様があるほうが嬉しいので探してみると [json](https://www.json.org/json-ja.html) を見つけた。  
-`digits` までは書けた。  
+仕様があるほうが嬉しいので探してみると [json](https://www.json.org/json-ja.html) がよさそうだった。  
+まずは `digits` を書いてみた。  
 [digit1](https://docs.rs/nom/latest/nom/character/complete/fn.digit1.html) を使えば終わりなのだが、それでは練習にならないため定義通りに実装。
 
 https://github.com/wat-aro/wjson
@@ -49,4 +50,4 @@ pub fn digits(input: &str) -> IResult<&str, u64> {
 }
 ```
 
-まだ `Rust` を書き慣れないけれど楽しい。
+まだ `Rust` を書き慣れていないけれど楽しい。
