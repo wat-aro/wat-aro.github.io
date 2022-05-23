@@ -1,4 +1,4 @@
-FROM node:18.1.0
+FROM mcr.microsoft.com/playwright:focal
 
 ENV LANG=ja_JP.UTF-8 \
     TZ=Asia/Tokyo \
@@ -6,5 +6,3 @@ ENV LANG=ja_JP.UTF-8 \
     APP_HOME=/usr/src/app
 
 WORKDIR $APP_HOME
-
-RUN npm install -g npm@8.9.0

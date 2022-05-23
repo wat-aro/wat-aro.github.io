@@ -30,6 +30,7 @@ type Props = {
   posts: Post[];
 };
 
+// TODO: og image を設定する
 const Home: NextPage<Props> = ({ posts }) => {
   posts.sort((x, y) => {
     return new Date(x.data.published).getTime() <
@@ -43,7 +44,7 @@ const Home: NextPage<Props> = ({ posts }) => {
       <Head>
         <title>(wat-aro)</title>
       </Head>
-      <Layout>
+      <Layout title="TOP" description="wat-aro のサイト" ogImage="">
         {posts.map((post) => (
           <Link href={`/posts/${post.slug}`} key={post.slug}>
             <a className="hover:border-b-2">

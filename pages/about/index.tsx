@@ -21,13 +21,14 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
   };
 };
 
+// TODO: og image を設定する
 const About: NextPage<Props> = ({ title, published, tags, content }) => {
   return (
     <>
       <Head>
         <title>about | (wat-aro)</title>
       </Head>
-      <Layout>
+      <Layout title="about" description="(wat-aro) について" ogImage="">
         <MarkDownPost
           title={title}
           published={published}

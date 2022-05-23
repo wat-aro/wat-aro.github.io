@@ -3,38 +3,41 @@ name: github pages
 on:
   push:
     branches:
-    - main
+      - main
 
 jobs:
   build-deploy:
     runs-on: ubuntu-18.04
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-    - name: setup node
-      uses: actions/setup-node@v1
-      with:
-        node-version: '16'
+      - name: setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '16'
 
-    - name: Cache dependencies
-      uses: actions/cache@v3
-      with:
-        path: node_modules
-        key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-node-
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
-    - name: install
-      run: yarn
+      - name: install
+        run: yarn
 
-    - name: export
-      run: yarn export
+      - name: playwright install
+        run: yarn playwright install chromium
 
-    - name: add nojekyll
-      run: touch ./out/.nojekyll
+      - name: export
+        run: yarn export
 
-    - name: deploy
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./out
+      - name: add nojekyll
+        run: touch ./out/.nojekyll
+
+      - name: deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./out
