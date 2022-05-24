@@ -28,7 +28,7 @@ const About: NextPage<Props> = ({ title, published, tags, content }) => {
       <Head>
         <title>about | (wat-aro)</title>
       </Head>
-      <Layout title="about" description="(wat-aro) について" ogImage="">
+      <Layout>
         <MarkDownPost
           title={title}
           published={published}

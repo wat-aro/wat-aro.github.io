@@ -44,7 +44,7 @@ const Home: NextPage<Props> = ({ posts }) => {
       <Head>
         <title>(wat-aro)</title>
       </Head>
-      <Layout title="TOP" description="wat-aro のサイト" ogImage="">
+      <Layout>
         {posts.map((post) => (
           <Link href={`/posts/${post.slug}`} key={post.slug}>
             <a className="border-b-2 border-gray-200 border-opacity-0 hover:border-opacity-100">

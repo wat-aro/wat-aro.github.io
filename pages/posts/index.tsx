@@ -44,7 +44,7 @@ const Posts: React.FC<Props> = ({ posts }) => {
       <Head>
         <title>Posts | (wat-aro)</title>
       </Head>
-      <Layout title="Posts" description="投稿一覧" ogImage="">
+      <Layout>
         <h1 className="text-3xl mb-4">Posts</h1>
         {posts.map((post) => (
           <Link href={`/posts/${post.slug}`} key={post.slug}>

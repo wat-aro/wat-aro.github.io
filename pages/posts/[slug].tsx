@@ -67,7 +67,11 @@ const Post: React.FC<Props> = ({
       <Head>
         <title>{title} | (wat-aro)</title>
       </Head>
-      <Layout title={title} description={description} ogImage={ogImage}>
+      <Layout
+        title={`${title} | (wat-aro)`}
+        description={description}
+        ogImage={ogImage}
+      >
         <MarkDownPost
           title={title}
           published={published}
