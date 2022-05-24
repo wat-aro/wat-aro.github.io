@@ -9,7 +9,7 @@ type Params = {
 export const takeScreenshot = async ({ title, slug }: Params) => {
   const browser = await chromium.launch();
   const context = await browser.newContext({
-    viewport: { width: 1200, height: 600 },
+    viewport: { width: 1200, height: 630 },
   });
   const page = await context.newPage();
   const html = getHtml({ title });
