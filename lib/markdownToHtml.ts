@@ -6,11 +6,13 @@ import remarkGfm from 'remark-gfm';
 import remarkRehype from 'remark-rehype';
 import rehypeStringify from 'rehype-stringify';
 import rehypePrismPlus from 'rehype-prism-plus';
+import remarkBreaks from 'remark-breaks';
 
 export const markdownToHtml = async (markdown: string) => {
   const result = await unified()
     .use(remarkParse)
     .use(remarkFrontmatter)
+    .use(remarkBreaks)
     .use(remarkEmoji)
     .use(remarkGfm)
     .use(remarkRehype)
