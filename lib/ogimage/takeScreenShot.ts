@@ -12,6 +12,7 @@ export const takeScreenshot = async ({ title, slug }: Params) => {
     viewport: { width: 1200, height: 630 },
   });
   const page = await context.newPage();
+  await page.setDefaultTimeout(0);
   const html = getHtml({ title });
   await page.setContent(html, { waitUntil: 'load' });
   await page.screenshot({
