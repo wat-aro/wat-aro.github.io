@@ -7,6 +7,7 @@ import remarkRehype from 'remark-rehype';
 import rehypeStringify from 'rehype-stringify';
 import rehypePrismPlus from 'rehype-prism-plus';
 import remarkBreaks from 'remark-breaks';
+import rehypeSlug from 'rehype-slug';
 
 export const markdownToHtml = async (markdown: string) => {
   const result = await unified()
@@ -16,6 +17,7 @@ export const markdownToHtml = async (markdown: string) => {
     .use(remarkEmoji)
     .use(remarkGfm)
     .use(remarkRehype)
+    .use(rehypeSlug)
     .use(rehypePrismPlus, { ignoreMissing: true })
     .use(rehypeStringify)
     .process(markdown);
