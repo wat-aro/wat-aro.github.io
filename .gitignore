@@ -33,6 +33,3 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
-
-# ignore ogimages
-public/og-images
