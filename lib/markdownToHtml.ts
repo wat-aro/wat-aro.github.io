@@ -8,10 +8,8 @@ import rehypeStringify from 'rehype-stringify';
 import rehypePrismPlus from 'rehype-prism-plus';
 import remarkBreaks from 'remark-breaks';
 import rehypeSlug from 'rehype-slug';
-import { Plugin } from 'unified';
-import { visit } from 'unist-util-visit';
 import rehypeRaw from 'rehype-raw';
-import { Element, ElementContent } from 'hast';
+import { rehypeHatenaCodeBlock } from './rehypeHatenaCodeBlock';
 
 export const markdownToHtml = async (markdown: string) => {
   const result = await unified()
@@ -29,27 +27,4 @@ export const markdownToHtml = async (markdown: string) => {
     .process(markdown);
 
   return result.toString();
-};
-
-const rehypeHatenaCodeBlock: Plugin = () => {
-  return (tree, file) => {
-    visit(tree, 'element', (node: Element) => {
-      if (
-        node.tagName == 'pre' &&
-        node.properties?.className &&
-        Array.isArray(node.properties.className) &&
-        node.properties.className.includes('code')
-      ) {
-        const children = node.children;
-        const code = {
-          type: 'element',
-          tagName: 'code',
-          properties: {},
-          children: children,
-        } as ElementContent;
-        node.children = [code];
-      }
-      return true;
-    });
-  };
 };
