@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "generate-ogimages": "ls contents/posts | wc -l | awk '{n = ($1/50); for (i = 0; i < n; i++) { printf(\"ts-node --project scripts.tsconfig.json scripts/generate-og-image.ts %d %d\\n\", i*50, (i+1)*50)}}' | xargs -n6 yarn",
+    "generate-ogimages": "ts-node --project scripts.tsconfig.json scripts/generate-og-images.ts",
+    "generate-all-ogimages": "ls contents/posts | wc -l | awk '{n = ($1/50); for (i = 0; i < n; i++) { printf(\"ts-node --project scripts.tsconfig.json scripts/generate-og-image.ts %d %d\\n\", i*50, (i+1)*50)}}' | xargs -n6 yarn",
     "generate-ogimage": "ts-node --project scripts.tsconfig.json scripts/generate-og-image.ts",
     "export": "yarn generate-ogimages && next build && next export"
   },
