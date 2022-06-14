@@ -8,12 +8,21 @@ export type PostData = {
   tags: string[];
 };
 
-export const getPostByPath = (
-  path: string
-): { data: PostData; content: string } => {
+export type Post = {
+  data: PostData;
+  content: string;
+  slug: string;
+};
+
+export const getPostByPath = (path: string): Post => {
   const fileContents = fs.readFileSync(path, 'utf-8');
   const { data, content } = matter(fileContents);
-  return { data, content } as { data: PostData; content: string };
+  const slug = path.split('/').splice(-1)[0].replace(/\.md$/, '');
+  return { data, content, slug } as {
+    data: PostData;
+    content: string;
+    slug: string;
+  };
 };
 
 export const getPostBySlug = (

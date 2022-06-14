@@ -7,10 +7,8 @@ import { getPostBySlug } from '../../lib/api';
 import { getFiles } from '../../lib/getFiles';
 import { markdownToHtml } from '../../lib/markdownToHtml';
 
-const contentsDir = join(process.cwd(), 'contents');
-
 export const getStaticPaths: GetStaticPaths = async () => {
-  const postsDir = join(contentsDir, 'posts');
+  const postsDir = join(process.cwd(), 'contents', 'posts');
   const files = await getFiles(postsDir);
   const slugs = files.map((file) =>
     file.split('/').slice(-1)[0].replace(/\.md$/, '')

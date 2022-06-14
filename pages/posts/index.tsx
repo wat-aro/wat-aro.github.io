@@ -1,29 +1,21 @@
 import { GetStaticProps } from 'next';
 import { join } from 'path';
 import { getFiles } from '../../lib/getFiles';
-import { getPostByPath, PostData } from '../../lib/api';
+import { getPostByPath, Post } from '../../lib/api';
 import Link from 'next/link';
 import Head from 'next/head';
 import { Layout } from '../../components/Layout';
+import { postPath } from '../../lib/postPath';
 
 export const getStaticProps: GetStaticProps = async () => {
   const contentsDir = join(process.cwd(), 'contents');
   const postsDir = join(contentsDir, 'posts');
   const files = await getFiles(postsDir);
-  const posts = files.map((file) => ({
-    ...getPostByPath(file),
-    slug: file.split('/').splice(-1)[0].replace(/\.md$/, ''),
-  }));
+  const posts = files.map((file) => getPostByPath(file));
 
   return {
     props: { posts },
   };
-};
-
-type Post = {
-  slug: string;
-  data: PostData;
-  content: string;
 };
 
 type Props = {
@@ -47,7 +39,7 @@ const Posts: React.FC<Props> = ({ posts }) => {
       <Layout>
         <h1 className="text-3xl mb-4">Posts</h1>
         {posts.map((post) => (
-          <Link href={`/posts/${post.slug}`} key={post.slug}>
+          <Link href={postPath(post)} key={post.slug}>
             <a className="border-b-2 border-gray-200 border-opacity-0 hover:border-opacity-100">
               <div className="flex pt-2 pb-1 justify-between">
                 <div className="text-xl md:w-5/6 w-9/12">{post.data.title}</div>
