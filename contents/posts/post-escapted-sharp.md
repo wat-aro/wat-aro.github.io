@@ -1,5 +1,5 @@
 ---
-title: URL に#が含まれる記事のリンクを修正する
+title: Next.js で URL に#を含むページを作成する
 published: 2022/06/14
 tags:
   - Next.js
