@@ -32,6 +32,7 @@ export const getHtml: GetHtml = ({ title }) => `
        font-size: 100px;
        margin: 0;
        text-align: center;
+       word-break: keep-all;
    }
    .footer {
        display: flex;
