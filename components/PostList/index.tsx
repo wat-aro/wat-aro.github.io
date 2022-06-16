@@ -22,7 +22,7 @@ export const PostList: React.FC<Props> = ({ posts }) => {
   return (
     <>
       {sorted.map((post) => (
-        <PostListItem post={post} />
+        <PostListItem post={post} key={post.slug} />
       ))}
     </>
   );

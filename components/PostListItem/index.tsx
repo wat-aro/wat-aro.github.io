@@ -8,7 +8,7 @@ type Props = {
 
 export const PostListItem: React.FC<Props> = ({ post }) => {
   return (
-    <Link href={postPath(post)} key={post.slug}>
+    <Link href={postPath(post)}>
       <a className="border-b-2 border-gray-200 border-opacity-0 hover:border-opacity-100">
         <div className="flex pt-2 pb-1 justify-between">
           <div className="text-xl md:w-5/6 w-9/12">{post.data.title}</div>
