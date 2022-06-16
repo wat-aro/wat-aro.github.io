@@ -16,7 +16,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   return {
     paths: slugs.map((slug) => ({ params: { slug } })),
-    fallback: true,
+    fallback: false,
   };
 };
 

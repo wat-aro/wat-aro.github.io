@@ -1,5 +1,5 @@
 ---
-title: "Array#slice"
+title: 'Array#slice'
 published: 2015/03/25
 tags:
   - ruby

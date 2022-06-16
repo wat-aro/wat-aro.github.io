@@ -26,7 +26,7 @@ const Menu: React.FC<MenuProps> = ({ currentPath }) => {
           (showPostsPage ? 'pb-3 border-b-4' : 'pb-4')
         }
       >
-        <Link href="/posts">Blog</Link>
+        <Link href="/posts/pages/1">Blog</Link>
       </li>
     </ul>
   );
