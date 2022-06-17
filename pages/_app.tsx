@@ -31,8 +31,20 @@ function MyApp({ Component, pageProps }: AppProps) {
       {isProduction && <GoogleTagManager />}
       <Header />
       <Component {...pageProps} />
+      <Footer />
     </div>
   );
 }
+
+const Footer: React.FC = () => {
+  return (
+    <div className="flex md:justify-center w-full">
+      <div className="flex flex-col md:max-w-4xl w-full">
+        <hr />
+        <div className="flex justify-center pt-4 pb-8">&#xA9; 2022 wat-aro</div>
+      </div>
+    </div>
+  );
+};
 
 export default MyApp;
