@@ -39,7 +39,7 @@ export const Layout: React.FC<Props> = ({
         <meta name="twitter:description" content={description} />
         <meta name="twitter:image" content={image} />
       </Head>
-      <div className="flex md:justify-center justify-between w-full">
+      <div className="flex md:justify-center justify-between w-full flex-grow">
         <div className="flex flex-col sm:max-w-sm md:max-w-4xl w-full py-4 px-4">
           {children}
         </div>

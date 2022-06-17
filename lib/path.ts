@@ -1,5 +1,3 @@
-import { Post } from './post';
-
 // NOTE: # => '%23' => '%2523'
 const encodedSharp =
   process.env.NODE_ENV == 'production'

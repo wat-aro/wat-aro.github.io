@@ -16,6 +16,11 @@ const list = async (): Promise<PostWithoutContent[]> => {
   );
 };
 
+const listByTag = async (tag: string): Promise<PostWithoutContent[]> => {
+  const posts = await list();
+  return posts.filter((post) => post.data.tags?.includes(tag));
+};
+
 const findByPath = async (path: string): Promise<Post> => {
   const fileContents = fs.readFileSync(path, 'utf-8');
   const { data, content } = matter(fileContents);
@@ -27,6 +32,6 @@ const findBySlug = async (slug: string): Promise<Post> => {
   return findByPath(join(postDir, `${slug}.md`));
 };
 
-const PostRepository = { list, findByPath, findBySlug };
+const PostRepository = { list, listByTag, findByPath, findBySlug };
 
 export default PostRepository;

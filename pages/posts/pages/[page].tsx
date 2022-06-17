@@ -35,7 +35,9 @@ type Props = {
   pages: number[];
 };
 
-export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
+export const getStaticProps: GetStaticProps<Props, Params> = async ({
+  params,
+}) => {
   const currentPage = Number(params!.page);
   const posts = await PostRepository.list();
   const sorted = sortByPublishedDate(posts);

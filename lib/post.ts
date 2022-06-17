@@ -1,7 +1,7 @@
 type PostData = {
   title: string;
   published: string;
-  tags: string[];
+  tags?: string[];
 };
 
 export type Post = {

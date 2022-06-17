@@ -9,7 +9,11 @@ type Props = {
 
 const Tag: React.FC<{ tag: string }> = ({ tag }) => {
   return (
-    <p className="mr-1 rounded-full px-2 py-1 border leading-none">{tag}</p>
+    <Link href={`/posts/tags/${tag}`}>
+      <a>
+        <p className="mr-1 rounded-full px-2 py-1 border leading-none">{tag}</p>
+      </a>
+    </Link>
   );
 };
 
