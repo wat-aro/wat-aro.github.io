@@ -3,10 +3,9 @@ import { PostListItem } from '../PostListItem';
 
 type Props = {
   posts: Post[];
-  page: number;
 };
 
-export const PostList: React.FC<Props> = ({ posts, page }) => {
+export const PostList: React.FC<Props> = ({ posts }) => {
   return (
     <>
       {posts.map((post) => (
