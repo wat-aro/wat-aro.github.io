@@ -8,7 +8,7 @@ import { getFiles } from '../../../lib/getFiles';
 import { range } from '../../../lib/range';
 import { sortByPublishedDate } from '../../../lib/sortByPublishedDate';
 import PostRepository from '../../../lib/repository/post';
-import { Post } from '../../../lib/post';
+import { PostWithoutContent } from '../../../lib/post';
 
 type Params = {
   page: string;
@@ -30,7 +30,7 @@ export const getStaticPaths: GetStaticPaths<Params> = async () => {
 };
 
 type Props = {
-  posts: Post[];
+  posts: PostWithoutContent[];
   currentPage: number;
   pages: number[];
 };

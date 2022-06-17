@@ -6,12 +6,12 @@ import { PostList } from '../../components/PostList';
 import { range } from '../../lib/range';
 import { sortByPublishedDate } from '../../lib/sortByPublishedDate';
 import PostRepository from '../../lib/repository/post';
-import { Post } from '../../lib/post';
+import { PostWithoutContent } from '../../lib/post';
 
 const perPage = 20;
 
 type Props = {
-  posts: Post[];
+  posts: PostWithoutContent[];
   currentPage: number;
   pages: number[];
 };

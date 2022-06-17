@@ -1,9 +1,9 @@
 import Link from 'next/link';
-import { Post } from '../../lib/post';
+import { PostWithoutContent } from '../../lib/post';
 import { postPath } from '../../lib/path';
 
 type Props = {
-  post: Post;
+  post: PostWithoutContent;
 };
 
 export const PostListItem: React.FC<Props> = ({ post }) => {

@@ -1,17 +1,15 @@
 import type { GetStaticProps, NextPage } from 'next';
 import Head from 'next/head';
-import { join } from 'path';
 import { Layout } from '../components/Layout';
 import { Pagination } from '../components/Pagination';
 import { PostList } from '../components/PostList';
-import { getFiles } from '../lib/getFiles';
 import { range } from '../lib/range';
 import { sortByPublishedDate } from '../lib/sortByPublishedDate';
 import PostRepository from '../lib/repository/post';
-import { Post } from '../lib/post';
+import { PostWithoutContent } from '../lib/post';
 
 type Props = {
-  posts: Post[];
+  posts: PostWithoutContent[];
   currentPage: number;
   pages: number[];
 };

@@ -9,3 +9,5 @@ export type Post = {
   content: string;
   slug: string;
 };
+
+export type PostWithoutContent = Omit<Post, 'content'>;

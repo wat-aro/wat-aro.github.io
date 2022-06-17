@@ -6,7 +6,7 @@ const encodedSharp =
     ? encodeURIComponent(encodeURIComponent('#'))
     : encodeURIComponent('#');
 
-export const postPath = (post: Post): string =>
+export const postPath = (post: { slug: string }): string =>
   `/posts/${post.slug.replaceAll('#', encodedSharp)}`;
 
 export const postsPagePath = (page: number): string => `/posts/pages/${page}`;

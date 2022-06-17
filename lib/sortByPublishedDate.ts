@@ -1,6 +1,8 @@
-import { Post } from './post';
+import { PostWithoutContent } from './post';
 
-export const sortByPublishedDate = (posts: Post[]): Post[] => {
+export const sortByPublishedDate = (
+  posts: PostWithoutContent[]
+): PostWithoutContent[] => {
   const copied = [...posts];
   copied.sort((x, y) => {
     return new Date(x.data.published).getTime() <

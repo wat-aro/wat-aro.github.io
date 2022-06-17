@@ -2,13 +2,18 @@ import fs from 'fs';
 import { join } from 'path';
 import { getFiles } from '../getFiles';
 import matter from 'gray-matter';
-import { Post } from '../post';
+import { Post, PostWithoutContent } from '../post';
 
 const postDir = join(process.cwd(), 'contents', 'posts');
 
-const list = async (): Promise<Post[]> => {
+const list = async (): Promise<PostWithoutContent[]> => {
   const files = await getFiles(postDir);
-  return Promise.all(files.map((file) => findByPath(file)));
+  return Promise.all(
+    files.map(async (file) => {
+      const { data, slug } = await findByPath(file);
+      return { data, slug };
+    })
+  );
 };
 
 const findByPath = async (path: string): Promise<Post> => {
