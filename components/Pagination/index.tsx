@@ -1,16 +1,12 @@
 import Link from 'next/link';
+import { postsPagePath } from '../../lib/postPath';
 
 type Props = {
   currentPage: number;
   pages: number[];
-  basePath: string;
 };
 
-export const Pagination: React.FC<Props> = ({
-  pages,
-  currentPage,
-  basePath,
-}) => {
+export const Pagination: React.FC<Props> = ({ pages, currentPage }) => {
   return (
     <div className="flex gap-4 py-4">
       {pages.map((p) =>
@@ -19,7 +15,7 @@ export const Pagination: React.FC<Props> = ({
             {currentPage}
           </div>
         ) : (
-          <Link href={`${basePath}${p}`} key={p}>
+          <Link href={postsPagePath(p)} key={p}>
             <a>{p}</a>
           </Link>
         )

@@ -43,11 +43,7 @@ const Posts: NextPage<Props> = ({ currentPage, pages, posts }) => {
       </Head>
       <Layout>
         <PostList posts={posts} />
-        <Pagination
-          pages={pages}
-          currentPage={currentPage}
-          basePath="/posts/pages/"
-        />
+        <Pagination pages={pages} currentPage={currentPage} />
       </Layout>
     </>
   );

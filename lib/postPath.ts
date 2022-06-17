@@ -8,3 +8,5 @@ const encodedSharp =
 
 export const postPath = (post: Post): string =>
   `/posts/${post.slug.replaceAll('#', encodedSharp)}`;
+
+export const postsPagePath = (page: number): string => `/posts/pages/${page}`;
