@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { postsPagePath } from '../../lib/postPath';
+import { postsPagePath } from '../../lib/path';
 
 type Props = {
   currentPage: number;

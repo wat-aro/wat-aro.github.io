@@ -1,4 +1,4 @@
-import { Post } from './api';
+import { Post } from './post';
 
 // NOTE: # => '%23' => '%2523'
 const encodedSharp =

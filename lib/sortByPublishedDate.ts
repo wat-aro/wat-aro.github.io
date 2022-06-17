@@ -1,4 +1,4 @@
-import { Post } from './api';
+import { Post } from './post';
 
 export const sortByPublishedDate = (posts: Post[]): Post[] => {
   const copied = [...posts];

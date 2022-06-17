@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import { Post } from '../../lib/api';
-import { postPath } from '../../lib/postPath';
+import { Post } from '../../lib/post';
+import { postPath } from '../../lib/path';
 
 type Props = {
   post: Post;

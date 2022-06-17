@@ -1,4 +1,4 @@
-import { Post } from '../../lib/api';
+import { Post } from '../../lib/post';
 import { PostListItem } from '../PostListItem';
 
 type Props = {

@@ -3,9 +3,10 @@ import Head from 'next/head';
 import { join } from 'path';
 import { Layout } from '../../components/Layout';
 import { MarkDownPost } from '../../components/MarkDownPost';
-import { getPostBySlug } from '../../lib/api';
 import { getFiles } from '../../lib/getFiles';
 import { markdownToHtml } from '../../lib/markdownToHtml';
+import PostRepository from '../../lib/repository/post';
+import { Post } from '../../lib/post';
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const postsDir = join(process.cwd(), 'contents', 'posts');
@@ -21,12 +22,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 type Props = {
-  title: string;
-  published: string;
-  tags?: string[];
+  post: Post;
   content: string;
-  slug: string;
-  rawContent?: string;
 };
 
 type Params = {
@@ -36,29 +33,21 @@ type Params = {
 export const getStaticProps: GetStaticProps<Props, Params> = async ({
   params,
 }) => {
-  const post = getPostBySlug(`contents/posts/${params!.slug}.md`);
+  const post = await PostRepository.findBySlug(params!.slug);
   const content = await markdownToHtml(post.content);
 
   return {
     props: {
-      ...post.data,
+      post,
       content,
-      slug: params!.slug,
-      rawContent: post.content,
     },
   };
 };
 
-const Post: React.FC<Props> = ({
-  title,
-  published,
-  tags,
-  content,
-  slug,
-  rawContent,
-}) => {
-  const description = rawContent?.replace(/[#\n]/g, '')?.slice(0, 160) || '';
-  const ogImage = `https://wat-aro.dev/og-images/${slug}.png`;
+const Post: React.FC<Props> = ({ post, content }) => {
+  const description = post.content.replace(/[#\n]/g, '')?.slice(0, 160) || '';
+  const ogImage = `https://wat-aro.dev/og-images/${post.slug}.png`;
+  const { title, published, tags } = post.data;
 
   return (
     <>

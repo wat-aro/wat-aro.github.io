@@ -2,8 +2,8 @@ import type { GetStaticProps, NextPage } from 'next';
 import Head from 'next/head';
 import { Layout } from '../../components/Layout';
 import { MarkDownPost } from '../../components/MarkDownPost';
-import { getPostBySlug } from '../../lib/api';
 import { markdownToHtml } from '../../lib/markdownToHtml';
+import AboutRepository from '../../lib/repository/about';
 
 type Props = {
   title: string;
@@ -13,7 +13,7 @@ type Props = {
 };
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-  const post = getPostBySlug('contents/about.md');
+  const post = await AboutRepository.find();
   const content = await markdownToHtml(post.content);
 
   return {
@@ -21,7 +21,6 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
   };
 };
 
-// TODO: og image を設定する
 const About: NextPage<Props> = ({ title, published, tags, content }) => {
   return (
     <>

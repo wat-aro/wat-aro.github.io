@@ -1,14 +1,14 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import Head from 'next/head';
-import Link from 'next/link';
 import { join } from 'path';
 import { Layout } from '../../../components/Layout';
 import { Pagination } from '../../../components/Pagination';
 import { PostList } from '../../../components/PostList';
-import { getPostByPath, Post } from '../../../lib/api';
 import { getFiles } from '../../../lib/getFiles';
 import { range } from '../../../lib/range';
 import { sortByPublishedDate } from '../../../lib/sortByPublishedDate';
+import PostRepository from '../../../lib/repository/post';
+import { Post } from '../../../lib/post';
 
 type Params = {
   page: string;
@@ -37,15 +37,13 @@ type Props = {
 
 export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
   const currentPage = Number(params!.page);
-  const postsDir = join(process.cwd(), 'contents', 'posts');
-  const files = await getFiles(postsDir);
-  const posts = files.map((file) => getPostByPath(file));
+  const posts = await PostRepository.list();
   const sorted = sortByPublishedDate(posts);
   const sliced = sorted.slice(
     perPage * (currentPage - 1),
     perPage * currentPage
   );
-  const maxPageNumer = Math.ceil(files.length / 20);
+  const maxPageNumer = Math.ceil(posts.length / 20);
   const pages = range(maxPageNumer);
 
   return {

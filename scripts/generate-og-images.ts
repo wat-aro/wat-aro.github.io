@@ -1,17 +1,9 @@
 import fs from 'fs';
-import { join } from 'path';
-import { getPostByPath } from '../lib/api';
-import { getFiles } from '../lib/getFiles';
 import { takeScreenshot } from '../lib/ogimage/takeScreenShot';
+import PostRepository from '../lib/repository/post';
 
 const generateOgImages = async () => {
-  const contentsDir = join(process.cwd(), 'contents');
-  const postsDir = join(contentsDir, 'posts');
-  const files = await getFiles(postsDir);
-  const posts = files.map((file) => ({
-    ...getPostByPath(file),
-    slug: file.split('/').splice(-1)[0].replace(/\.md$/, ''),
-  }));
+  const posts = await PostRepository.list();
 
   Promise.all(
     posts
