@@ -3,13 +3,13 @@ import Head from 'next/head';
 import { join } from 'path';
 import { Layout } from '../../../components/Layout';
 import { Pagination } from '../../../components/Pagination';
-import { PostList } from '../../../components/PostList';
+import { ContentList } from '../../../components/ContentList';
 import { getFiles } from '../../../lib/getFiles';
 import { range } from '../../../lib/range';
 import { sortByPublishedDate } from '../../../lib/sortByPublishedDate';
 import PostRepository from '../../../lib/repositories/post';
 import { PostWithoutContent } from '../../../lib/post';
-import { postsPagePath } from '../../../lib/path';
+import { postPath, postsPagePath } from '../../../lib/path';
 
 type Params = {
   page: string;
@@ -55,6 +55,12 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({
 };
 
 const Posts: NextPage<Props> = ({ posts, pages, currentPage }) => {
+  const entries = posts.map((post) => ({
+    title: post.data.title,
+    published: post.data.published,
+    path: postPath({ slug: post.slug }),
+  }));
+
   return (
     <>
       <Head>
@@ -62,7 +68,7 @@ const Posts: NextPage<Props> = ({ posts, pages, currentPage }) => {
       </Head>
       <Layout>
         <h1 className="text-3xl mb-4">Posts</h1>
-        <PostList posts={posts} />
+        <ContentList entries={entries} />
         <Pagination
           pages={pages}
           currentPage={currentPage}

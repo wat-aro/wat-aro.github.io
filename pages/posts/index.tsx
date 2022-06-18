@@ -2,12 +2,12 @@ import { GetStaticProps, NextPage } from 'next';
 import Head from 'next/head';
 import { Layout } from '../../components/Layout';
 import { Pagination } from '../../components/Pagination';
-import { PostList } from '../../components/PostList';
+import { ContentList } from '../../components/ContentList';
 import { range } from '../../lib/range';
 import { sortByPublishedDate } from '../../lib/sortByPublishedDate';
 import PostRepository from '../../lib/repositories/post';
 import { PostWithoutContent } from '../../lib/post';
-import { postsPagePath } from '../../lib/path';
+import { postPath, postsPagePath } from '../../lib/path';
 
 const perPage = 20;
 
@@ -34,6 +34,12 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
 };
 
 const Posts: NextPage<Props> = ({ posts, pages, currentPage }) => {
+  const entries = posts.map((post) => ({
+    title: post.data.title,
+    published: post.data.published,
+    path: postPath({ slug: post.slug }),
+  }));
+
   return (
     <>
       <Head>
@@ -41,7 +47,7 @@ const Posts: NextPage<Props> = ({ posts, pages, currentPage }) => {
       </Head>
       <Layout>
         <h1 className="text-3xl mb-4">Posts</h1>
-        <PostList posts={posts} />
+        <ContentList entries={entries} />
         <Pagination
           pages={pages}
           currentPage={currentPage}

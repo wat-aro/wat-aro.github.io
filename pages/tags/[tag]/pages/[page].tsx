@@ -2,8 +2,8 @@ import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import Head from 'next/head';
 import { Layout } from '../../../../components/Layout';
 import { Pagination } from '../../../../components/Pagination';
-import { PostList } from '../../../../components/PostList';
-import { tagsPagePath } from '../../../../lib/path';
+import { ContentList } from '../../../../components/ContentList';
+import { postPath, tagsPagePath } from '../../../../lib/path';
 import { PostWithoutContent } from '../../../../lib/post';
 import { range } from '../../../../lib/range';
 import PostRepository from '../../../../lib/repositories/post';
@@ -74,6 +74,12 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({
 };
 
 const TagPage: NextPage<Props> = ({ posts, tag, pages, currentPage }) => {
+  const entries = posts.map((post) => ({
+    title: post.data.title,
+    published: post.data.published,
+    path: postPath({ slug: post.slug }),
+  }));
+
   return (
     <>
       <Head>
@@ -81,7 +87,7 @@ const TagPage: NextPage<Props> = ({ posts, tag, pages, currentPage }) => {
       </Head>
       <Layout title={`${tag}`} description={`${tag}`}>
         <h1 className="text-3xl mb-4">{tag}</h1>
-        <PostList posts={posts} />
+        <ContentList entries={entries} />
         {pages.length > 1 && (
           <Pagination
             pages={pages}
