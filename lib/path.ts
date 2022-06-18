@@ -8,3 +8,10 @@ export const postPath = (post: { slug: string }): string =>
   `/posts/${post.slug.replaceAll('#', encodedSharp)}`;
 
 export const postsPagePath = (page: number): string => `/posts/pages/${page}`;
+
+export const tagsPagePath =
+  (tag: string) =>
+  (page: number): string =>
+    `/tags/${tag}/pages/${page}`;
+
+export const tagPath = (tag: string) => `/tags/${tag}`;

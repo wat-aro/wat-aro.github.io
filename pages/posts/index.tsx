@@ -7,6 +7,7 @@ import { range } from '../../lib/range';
 import { sortByPublishedDate } from '../../lib/sortByPublishedDate';
 import PostRepository from '../../lib/repository/post';
 import { PostWithoutContent } from '../../lib/post';
+import { postsPagePath } from '../../lib/path';
 
 const perPage = 20;
 
@@ -41,7 +42,11 @@ const Posts: NextPage<Props> = ({ posts, pages, currentPage }) => {
       <Layout>
         <h1 className="text-3xl mb-4">Posts</h1>
         <PostList posts={posts} />
-        <Pagination pages={pages} currentPage={currentPage} />
+        <Pagination
+          pages={pages}
+          currentPage={currentPage}
+          pathFunc={postsPagePath}
+        />
       </Layout>
     </>
   );

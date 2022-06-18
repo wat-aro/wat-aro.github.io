@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { tagPath } from '../../lib/path';
 
 type Props = {
   title: string;
@@ -9,7 +10,7 @@ type Props = {
 
 const Tag: React.FC<{ tag: string }> = ({ tag }) => {
   return (
-    <Link href={`/posts/tags/${tag}`}>
+    <Link href={tagPath(tag)}>
       <a>
         <p className="mr-1 rounded-full px-2 py-1 border leading-none">{tag}</p>
       </a>

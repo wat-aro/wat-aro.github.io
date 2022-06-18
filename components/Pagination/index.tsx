@@ -1,12 +1,16 @@
 import Link from 'next/link';
-import { postsPagePath } from '../../lib/path';
 
 type Props = {
   currentPage: number;
   pages: number[];
+  pathFunc: (page: number) => string;
 };
 
-export const Pagination: React.FC<Props> = ({ pages, currentPage }) => {
+export const Pagination: React.FC<Props> = ({
+  pages,
+  currentPage,
+  pathFunc,
+}) => {
   return (
     <div className="flex justify-center flex-wrap gap-4 py-4">
       {pages.map((p) =>
@@ -15,7 +19,7 @@ export const Pagination: React.FC<Props> = ({ pages, currentPage }) => {
             {currentPage}
           </div>
         ) : (
-          <Link href={postsPagePath(p)} key={p}>
+          <Link href={pathFunc(p)} key={p}>
             <a>{p}</a>
           </Link>
         )
