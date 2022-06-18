@@ -5,7 +5,7 @@ import { Layout } from '../../components/Layout';
 import { MarkDownPost } from '../../components/MarkDownPost';
 import { getFiles } from '../../lib/getFiles';
 import { markdownToHtml } from '../../lib/markdownToHtml';
-import PostRepository from '../../lib/repository/post';
+import PostRepository from '../../lib/repositories/post';
 import { Post } from '../../lib/post';
 
 export const getStaticPaths: GetStaticPaths = async () => {

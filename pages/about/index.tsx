@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { Layout } from '../../components/Layout';
 import { MarkDownPost } from '../../components/MarkDownPost';
 import { markdownToHtml } from '../../lib/markdownToHtml';
-import AboutRepository from '../../lib/repository/about';
+import AboutRepository from '../../lib/repositories/about';
 
 type Props = {
   title: string;

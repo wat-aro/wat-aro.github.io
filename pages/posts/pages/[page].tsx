@@ -7,7 +7,7 @@ import { PostList } from '../../../components/PostList';
 import { getFiles } from '../../../lib/getFiles';
 import { range } from '../../../lib/range';
 import { sortByPublishedDate } from '../../../lib/sortByPublishedDate';
-import PostRepository from '../../../lib/repository/post';
+import PostRepository from '../../../lib/repositories/post';
 import { PostWithoutContent } from '../../../lib/post';
 import { postsPagePath } from '../../../lib/path';
 

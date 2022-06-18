@@ -6,7 +6,7 @@ import { PostList } from '../../components/PostList';
 import { tagsPagePath } from '../../lib/path';
 import { PostWithoutContent } from '../../lib/post';
 import { range } from '../../lib/range';
-import PostRepository from '../../lib/repository/post';
+import PostRepository from '../../lib/repositories/post';
 import { sortByPublishedDate } from '../../lib/sortByPublishedDate';
 
 type Params = {

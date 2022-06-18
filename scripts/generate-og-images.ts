@@ -1,6 +1,6 @@
 import fs from 'fs';
 import { takeScreenshot } from '../lib/ogimage/takeScreenShot';
-import PostRepository from '../lib/repository/post';
+import PostRepository from '../lib/repositories/post';
 
 const generateOgImages = async () => {
   const posts = await PostRepository.list();

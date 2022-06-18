@@ -1,4 +1,4 @@
-import PostRepository from '../lib/repository/post';
+import PostRepository from '../lib/repositories/post';
 import { takeScreenshot } from '../lib/ogimage/takeScreenShot';
 
 const generateOgImages = async () => {

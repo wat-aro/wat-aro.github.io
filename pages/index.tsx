@@ -5,7 +5,7 @@ import { Pagination } from '../components/Pagination';
 import { PostList } from '../components/PostList';
 import { range } from '../lib/range';
 import { sortByPublishedDate } from '../lib/sortByPublishedDate';
-import PostRepository from '../lib/repository/post';
+import PostRepository from '../lib/repositories/post';
 import { PostWithoutContent } from '../lib/post';
 import { postsPagePath } from '../lib/path';
 import { TagList } from '../components/TagList';
