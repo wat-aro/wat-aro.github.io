@@ -43,10 +43,10 @@ const Posts: NextPage<Props> = ({ posts, tag }) => {
   return (
     <>
       <Head>
-        <title>{tag} の記事 | (wat-aro)</title>
+        <title>{tag} | (wat-aro)</title>
       </Head>
-      <Layout title={`${tag} の記事`} description={`${tag} の記事一覧`}>
-        <h1 className="text-3xl mb-4">{tag} の記事</h1>
+      <Layout title={`${tag}`} description={`${tag}`}>
+        <h1 className="text-3xl mb-4">{tag}</h1>
         <PostList posts={posts} />
       </Layout>
     </>
