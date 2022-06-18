@@ -8,7 +8,7 @@ type Props = {
 
 export const Pagination: React.FC<Props> = ({ pages, currentPage }) => {
   return (
-    <div className="flex gap-4 py-4 justify-center">
+    <div className="flex justify-center flex-wrap gap-4 py-4">
       {pages.map((p) =>
         p === currentPage ? (
           <div className="font-bold" key={p}>
