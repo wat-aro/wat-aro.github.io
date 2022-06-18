@@ -6,28 +6,33 @@ type MenuProps = {
   currentPath: string;
 };
 
+type MenuItemProps = {
+  title: string;
+  path: string;
+  showPage: boolean;
+};
+
+const MenuItem: React.FC<MenuItemProps> = ({ path, showPage, title }) => {
+  return (
+    <li
+      className={
+        'h-full flex flex-col justify-end border-black ' +
+        (showPage ? 'pb-3 border-b-4' : 'pb-4')
+      }
+    >
+      <Link href={path}>{title}</Link>
+    </li>
+  );
+};
+
 const Menu: React.FC<MenuProps> = ({ currentPath }) => {
   const showAboutPage = currentPath === 'about';
   const showPostsPage = currentPath === 'posts';
 
   return (
     <ul className="flex gap-3 h-full">
-      <li
-        className={
-          'h-full  flex flex-col justify-end border-black ' +
-          (showAboutPage ? 'pb-3 border-b-4' : 'pb-4')
-        }
-      >
-        <Link href="/about">About</Link>
-      </li>
-      <li
-        className={
-          'h-full  flex flex-col justify-end border-black ' +
-          (showPostsPage ? 'pb-3 border-b-4' : 'pb-4')
-        }
-      >
-        <Link href="/posts">Blog</Link>
-      </li>
+      <MenuItem title="Blog" path="/posts" showPage={currentPath === 'posts'} />
+      <MenuItem title="About" path="/about" showPage={currentPath == 'about'} />
     </ul>
   );
 };
