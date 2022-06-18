@@ -19,13 +19,14 @@ export const Layout: React.FC<Props> = ({
   const currentUrl = `${origin}${router.asPath}`;
 
   const ogTitle = title || '(wat-aro)';
-  const image = ogImage || `${origin}/images/profile.jpg`;
+  const ogDescription = description || 'wat-aro のサイト';
+  const image = ogImage || `${origin}/images/default-ogimage.png`;
 
   return (
     <>
       <Head>
         <meta name="title" content={ogTitle} />
-        <meta name="description" content={description} />
+        <meta name="description" content={ogDescription} />
         <meta property="og:locale" content="ja_jp" />
         <meta property="og:type" content="article" />
         <meta property="og:site_name" content="(wat-aro)" />
@@ -36,7 +37,7 @@ export const Layout: React.FC<Props> = ({
         <meta name="twitter:site" content="@wat_aro" />
         <meta name="twitter:creator" content="@wat_aro" />
         <meta name="twitter:title" content={ogTitle} />
-        <meta name="twitter:description" content={description} />
+        <meta name="twitter:description" content={ogDescription} />
         <meta name="twitter:image" content={image} />
       </Head>
       <div className="flex md:justify-center justify-between w-full flex-grow">
