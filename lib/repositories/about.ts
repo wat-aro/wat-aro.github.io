@@ -9,7 +9,8 @@ const find = async (): Promise<Post> => {
     'utf-8'
   );
   const { data, content } = matter(fileContents);
-  return { data, content, slug: 'about' } as Post;
+  const { title, published } = data;
+  return { title, published, tags: [], content, slug: 'about' };
 };
 
 const AboutRepository = { find };

@@ -5,8 +5,7 @@ export const sortByPublishedDate = (
 ): PostWithoutContent[] => {
   const copied = [...posts];
   copied.sort((x, y) => {
-    return new Date(x.data.published).getTime() <
-      new Date(y.data.published).getTime()
+    return new Date(x.published).getTime() < new Date(y.published).getTime()
       ? 1
       : -1;
   });

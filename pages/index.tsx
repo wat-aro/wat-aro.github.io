@@ -24,7 +24,7 @@ export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
   const posts = await PostRepository.list();
   const tags = new Set<string>();
   posts.forEach((post) => {
-    post.data.tags?.forEach((tag) => {
+    post.tags?.forEach((tag) => {
       tags.add(tag);
     });
   });
@@ -43,8 +43,8 @@ export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
 
 const Posts: NextPage<Props> = ({ currentPage, pages, posts, tags }) => {
   const entries = posts.map((post) => ({
-    title: post.data.title,
-    published: post.data.published,
+    title: post.title,
+    published: post.published,
     path: postPath({ slug: post.slug }),
   }));
 

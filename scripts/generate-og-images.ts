@@ -9,7 +9,7 @@ const generateOgImages = async () => {
     posts
       .filter((post) => !fs.existsSync(`public/og-images/${post.slug}.png`))
       .map((post) => {
-        takeScreenshot({ title: post.data.title, slug: post.slug });
+        takeScreenshot({ title: post.title, slug: post.slug });
       })
   );
 };

@@ -1,11 +1,7 @@
-type PostData = {
+export type Post = {
   title: string;
   published: string;
-  tags?: string[];
-};
-
-export type Post = {
-  data: PostData;
+  tags: string[];
   content: string;
   slug: string;
 };

@@ -47,7 +47,7 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({
 const Post: React.FC<Props> = ({ post, content }) => {
   const description = post.content.replace(/[#\n]/g, '')?.slice(0, 160) || '';
   const ogImage = `https://wat-aro.dev/og-images/${post.slug}.png`;
-  const { title, published, tags } = post.data;
+  const { title, published, tags } = post;
 
   return (
     <>

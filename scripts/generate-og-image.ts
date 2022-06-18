@@ -9,7 +9,7 @@ const generateOgImages = async () => {
 
   Promise.all(
     posts.slice(Number(start), Number(end)).map((post) => {
-      takeScreenshot({ title: post.data.title, slug: post.slug });
+      takeScreenshot({ title: post.title, slug: post.slug });
     })
   );
 };

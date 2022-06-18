@@ -24,7 +24,7 @@ export const getStaticPaths: GetStaticPaths<Params> = async () => {
   const tags: Tags = {};
   const posts = await PostRepository.list();
   posts.forEach((post) => {
-    post.data.tags?.forEach((tag) => {
+    post.tags?.forEach((tag) => {
       if (tags[tag]) {
         tags[tag] += 1;
       } else {
@@ -75,8 +75,8 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({
 
 const TagPage: NextPage<Props> = ({ posts, tag, pages, currentPage }) => {
   const entries = posts.map((post) => ({
-    title: post.data.title,
-    published: post.data.published,
+    title: post.title,
+    published: post.published,
     path: postPath({ slug: post.slug }),
   }));
 

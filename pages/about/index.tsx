@@ -17,7 +17,7 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
   const content = await markdownToHtml(post.content);
 
   return {
-    props: { ...post.data, content },
+    props: { ...post, content },
   };
 };
 
