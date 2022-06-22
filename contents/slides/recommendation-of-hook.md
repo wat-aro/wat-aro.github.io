@@ -26,7 +26,6 @@
 
 ---
 
----
 
 ## `React Hooks` とは
 
@@ -73,8 +72,6 @@ class Users extends React.Component<Props, State> {
   }
 }
 ```
-
----
 
 ---
 
