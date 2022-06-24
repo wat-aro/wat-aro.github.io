@@ -70,13 +70,13 @@ const Slide: NextPage<Props> = ({ slide }) => {
   return (
     <>
       <Layout>
-        <div className="top-0 left-0 w-full h-full">
+        <div className="top-0 left-0 w-full h-full slide">
           <div className="reveal">
             <div
               className="slides"
               dangerouslySetInnerHTML={{
                 __html: `
-                <section data-markdown>
+                <section data-markdown data-separator-vertical="^===\n">
                   <textarea data-template>
                     ${slide.content}
                   </textarea>
