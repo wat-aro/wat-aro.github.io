@@ -5,6 +5,7 @@ import { Layout } from '../../components/Layout';
 import { useEffect, useState } from 'react';
 import 'reveal.js/dist/reveal.css';
 import 'reveal.js/dist/theme/white.css';
+import 'reveal.js/plugin/highlight/zenburn.css';
 
 type Params = {
   slug: string;
@@ -34,6 +35,7 @@ type Props = { slide: SlideWithContent };
 const Slide: NextPage<Props> = ({ slide }) => {
   const [Reveal, setReveal] = useState<RevealStatic>();
   const [RevealMarkdown, setRevealMarkdown] = useState<Plugin>();
+  const [Highlight, setHighlight] = useState<Plugin>();
 
   const { slug } = slide;
 
@@ -43,13 +45,19 @@ const Slide: NextPage<Props> = ({ slide }) => {
         setReveal(await (await import('reveal.js')).default);
       } else if (RevealMarkdown == null) {
         setRevealMarkdown(
-          await await (
+          await (
             await import('reveal.js/plugin/markdown/markdown.esm')
+          ).default
+        );
+      } else if (Highlight == null) {
+        setHighlight(
+          await (
+            await import('reveal.js/plugin/highlight/highlight.esm')
           ).default
         );
       } else {
         await Reveal.initialize({
-          plugins: [RevealMarkdown],
+          plugins: [RevealMarkdown, Highlight],
           embedded: true,
           shuffle: false,
           history: true,
@@ -57,7 +65,7 @@ const Slide: NextPage<Props> = ({ slide }) => {
       }
     };
     clientSideInitialization();
-  }, [slug, Reveal, RevealMarkdown]);
+  }, [slug, Reveal, RevealMarkdown, Highlight]);
 
   return (
     <>
