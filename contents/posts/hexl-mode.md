@@ -1,5 +1,5 @@
 ---
-title: Emacs でバイナリファイルを開く
+title: Emacs でバイナリファイルを編集する
 published: '2022/07/12'
 tags:
   - Emacs
