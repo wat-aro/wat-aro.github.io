@@ -6,5 +6,5 @@ https://wat-aro.dev
 
 ```
 docker-compose build
-docker-compose run --rm app yarn
+docker-compose run --rm app pnpm install
 ```

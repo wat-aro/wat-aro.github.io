@@ -12,14 +12,14 @@ This repository is a statically exported Next.js site.
 - `stories/`: Storybook stories and demo assets.
 
 ## Build, Test, and Development Commands
-- `yarn`: install dependencies.
-- `yarn dev`: start local dev server on port `3000`.
-- `yarn lint`: run ESLint with the flat config (`eslint.config.mjs`).
-- `yarn build`: build production bundle.
-- `yarn export`: generate OG images, build, then export static files to `out/`.
-- `yarn storybook`: run Storybook on port `6006`.
-- `yarn build-storybook`: build static Storybook output.
-- Docker setup (optional): `docker-compose build` then `docker-compose run --rm app yarn`.
+- `pnpm install`: install dependencies.
+- `pnpm dev`: start local dev server on port `3000`.
+- `pnpm lint`: run ESLint with the flat config (`eslint.config.mjs`).
+- `pnpm build`: build production bundle.
+- `pnpm export`: generate OG images, build, then export static files to `out/`.
+- `pnpm storybook`: run Storybook on port `6006`.
+- `pnpm build-storybook`: build static Storybook output.
+- Docker setup (optional): `docker-compose build` then `docker-compose run --rm app pnpm install`.
 
 ## Coding Style & Naming Conventions
 - Language: TypeScript with `strict: true` (`tsconfig.json`).
@@ -33,9 +33,9 @@ This repository is a statically exported Next.js site.
 ## Testing Guidelines
 There is no dedicated unit-test framework in this repo right now.
 
-- Required checks before opening a PR: `yarn lint` and `yarn build`.
-- For UI updates, verify in Storybook (`yarn storybook`) and test changed pages locally (`yarn dev`).
-- For OG image script changes, run `yarn generate-ogimage <start> <end>` on a small range first.
+- Required checks before opening a PR: `pnpm lint` and `pnpm build`.
+- For UI updates, verify in Storybook (`pnpm storybook`) and test changed pages locally (`pnpm dev`).
+- For OG image script changes, run `pnpm generate-ogimage <start> <end>` on a small range first.
 
 ## Commit & Pull Request Guidelines
 - Follow the existing commit style: short, imperative subjects (for example `Add tag`, `Fix ogimage`, `Refactor`).
@@ -44,7 +44,7 @@ There is no dedicated unit-test framework in this repo right now.
   - what changed and why,
   - affected routes/content paths,
   - screenshots for visible UI changes,
-  - confirmation that `yarn lint` and `yarn build` passed.
+  - confirmation that `pnpm lint` and `pnpm build` passed.
 
 ## Deployment Notes
-Pushes to `main` trigger GitHub Actions (`.github/workflows/gh-pages.yml`) to run `yarn export` and deploy `out/` to GitHub Pages.
+Pushes to `main` trigger GitHub Actions (`.github/workflows/gh-pages.yml`) to run `pnpm export` and deploy `out/` to GitHub Pages.

@@ -9,29 +9,28 @@ jobs:
   build-deploy:
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
+
+      - name: setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
 
       - name: setup node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4
         with:
           node-version: '22'
-
-      - name: Cache dependencies
-        uses: actions/cache@v3
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
 
       - name: install
-        run: yarn
+        run: pnpm install --frozen-lockfile
 
       - name: playwright install
-        run: yarn playwright install chromium
+        run: pnpm exec playwright install chromium
 
       - name: export
-        run: yarn export
+        run: pnpm run export
 
       - name: add nojekyll
         run: touch ./out/.nojekyll
