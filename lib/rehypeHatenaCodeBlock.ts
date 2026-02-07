@@ -3,7 +3,7 @@ import { visit } from 'unist-util-visit';
 import { Element, ElementContent } from 'hast';
 
 export const rehypeHatenaCodeBlock: Plugin = () => {
-  return (tree, file) => {
+  return (tree) => {
     visit(tree, 'element', (node: Element) => {
       if (
         node.tagName == 'pre' &&

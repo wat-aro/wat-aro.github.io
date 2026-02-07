@@ -1,3 +1,5 @@
+import { normalizeTag } from './tag';
+
 // NOTE: # => '%23' => '%2523'
 const encodedSharp =
   process.env.NODE_ENV == 'production'
@@ -12,6 +14,7 @@ export const postsPagePath = (page: number): string => `/posts/pages/${page}`;
 export const tagsPagePath =
   (tag: string) =>
   (page: number): string =>
-    `/tags/${tag}/pages/${page}`;
+    `/tags/${encodeURIComponent(normalizeTag(tag))}/pages/${page}`;
 
-export const tagPath = (tag: string) => `/tags/${tag}`;
+export const tagPath = (tag: string) =>
+  `/tags/${encodeURIComponent(normalizeTag(tag))}`;

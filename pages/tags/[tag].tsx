@@ -8,6 +8,7 @@ import { PostWithoutContent } from '../../lib/post';
 import { range } from '../../lib/range';
 import PostRepository from '../../lib/repositories/post';
 import { sortByPublishedDate } from '../../lib/sortByPublishedDate';
+import { normalizeTag } from '../../lib/tag';
 
 type Params = {
   tag: string;
@@ -18,7 +19,7 @@ export const getStaticPaths: GetStaticPaths<Params> = async () => {
   const posts = await PostRepository.list();
   posts.forEach((post) => {
     post.tags?.forEach((tag) => {
-      tags.add(tag);
+      tags.add(normalizeTag(tag));
     });
   });
 
@@ -31,6 +32,7 @@ export const getStaticPaths: GetStaticPaths<Params> = async () => {
 type Props = {
   posts: PostWithoutContent[];
   tag: string;
+  tagSlug: string;
   currentPage: number;
   pages: number[];
 };
@@ -40,8 +42,13 @@ const perPage = 20;
 export const getStaticProps: GetStaticProps<Props, Params> = async ({
   params,
 }) => {
+  const tagSlug = normalizeTag(params!.tag);
   const currentPage = 1;
-  const posts = await PostRepository.listByTag(params!.tag);
+  const posts = await PostRepository.listByTag(tagSlug);
+  const displayTag =
+    posts
+      .flatMap((post) => post.tags ?? [])
+      .find((tag) => normalizeTag(tag) === tagSlug) ?? tagSlug;
   const sorted = sortByPublishedDate(posts);
   const sliced = sorted.slice(
     perPage * (currentPage - 1),
@@ -51,11 +58,11 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({
   const pages = range(maxPageNumer);
 
   return {
-    props: { posts: sliced, currentPage, pages, tag: params!.tag },
+    props: { posts: sliced, currentPage, pages, tag: displayTag, tagSlug },
   };
 };
 
-const Tag: NextPage<Props> = ({ posts, tag, pages, currentPage }) => {
+const Tag: NextPage<Props> = ({ posts, tag, tagSlug, pages, currentPage }) => {
   const entries = posts.map((post) => ({
     title: post.title,
     published: post.published,
@@ -74,7 +81,7 @@ const Tag: NextPage<Props> = ({ posts, tag, pages, currentPage }) => {
           <Pagination
             pages={pages}
             currentPage={currentPage}
-            pathFunc={tagsPagePath(tag)}
+            pathFunc={tagsPagePath(tagSlug)}
           />
         )}
       </Layout>

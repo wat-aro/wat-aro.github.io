@@ -3,6 +3,7 @@ import { join } from 'path';
 import { getFiles } from '../getFiles';
 import matter from 'gray-matter';
 import { Post, PostWithoutContent } from '../post';
+import { normalizeTag } from '../tag';
 
 const postDir = join(process.cwd(), 'contents', 'posts');
 
@@ -18,7 +19,10 @@ const list = async (): Promise<PostWithoutContent[]> => {
 
 const listByTag = async (tag: string): Promise<PostWithoutContent[]> => {
   const posts = await list();
-  return posts.filter((post) => post.tags?.includes(tag));
+  const normalized = normalizeTag(tag);
+  return posts.filter((post) =>
+    post.tags?.some((postTag) => normalizeTag(postTag) === normalized)
+  );
 };
 
 const findByPath = async (path: string): Promise<Post> => {

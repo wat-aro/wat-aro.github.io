@@ -26,9 +26,6 @@ const MenuItem: React.FC<MenuItemProps> = ({ path, showPage, title }) => {
 };
 
 const Menu: React.FC<MenuProps> = ({ currentPath }) => {
-  const showAboutPage = currentPath === 'about';
-  const showPostsPage = currentPath === 'posts';
-
   return (
     <ul className="flex gap-3 h-full">
       <MenuItem title="Blog" path="/posts" showPage={currentPath === 'posts'} />
@@ -48,18 +45,16 @@ export const Header: React.FC = () => {
   return (
     <div className="top-0 bg-white w-full h-16 flex flex-row justify-between items-center px-4 border-b-2">
       <Link href="/">
-        <a>
-          <div className="flex items-center font-midium text-3xl h-full font-bold gap-4">
-            <img
-              className="rounded-full"
-              src="/images/profile.jpg"
-              width="48"
-              height="48"
-              alt="profile image"
-            />
-            {SITENAME}
-          </div>
-        </a>
+        <div className="flex items-center font-midium text-3xl h-full font-bold gap-4">
+          <img
+            className="rounded-full"
+            src="/images/profile.jpg"
+            width="48"
+            height="48"
+            alt="profile image"
+          />
+          {SITENAME}
+        </div>
       </Link>
       <Menu currentPath={router.asPath.split('/')[1]} />
     </div>

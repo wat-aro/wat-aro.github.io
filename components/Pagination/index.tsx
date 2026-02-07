@@ -20,7 +20,7 @@ export const Pagination: React.FC<Props> = ({
           </div>
         ) : (
           <Link href={pathFunc(p)} key={p}>
-            <a>{p}</a>
+            {p}
           </Link>
         )
       )}

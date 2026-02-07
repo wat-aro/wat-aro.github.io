@@ -6,7 +6,7 @@ import { MarkDownPost } from '../../components/MarkDownPost';
 import { getFiles } from '../../lib/getFiles';
 import { markdownToHtml } from '../../lib/markdownToHtml';
 import PostRepository from '../../lib/repositories/post';
-import { Post } from '../../lib/post';
+import type { Post } from '../../lib/post';
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const postsDir = join(process.cwd(), 'contents', 'posts');
@@ -44,7 +44,7 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({
   };
 };
 
-const Post: React.FC<Props> = ({ post, content }) => {
+const PostPage: React.FC<Props> = ({ post, content }) => {
   const description = post.content.replace(/[#\n]/g, '')?.slice(0, 160) || '';
   const ogImage = `https://wat-aro.dev/og-images/${post.slug}.png`;
   const { title, published, tags } = post;
@@ -70,4 +70,4 @@ const Post: React.FC<Props> = ({ post, content }) => {
   );
 };
 
-export default Post;
+export default PostPage;

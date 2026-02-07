@@ -9,6 +9,7 @@ import PostRepository from '../lib/repositories/post';
 import { PostWithoutContent } from '../lib/post';
 import { postPath, postsPagePath } from '../lib/path';
 import { TagList } from '../components/TagList';
+import { normalizeTag } from '../lib/tag';
 
 type Props = {
   posts: PostWithoutContent[];
@@ -19,13 +20,16 @@ type Props = {
 
 const perPage = 20;
 
-export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
+export const getStaticProps: GetStaticProps<Props> = async () => {
   const currentPage = 1;
   const posts = await PostRepository.list();
-  const tags = new Set<string>();
+  const tags = new Map<string, string>();
   posts.forEach((post) => {
     post.tags?.forEach((tag) => {
-      tags.add(tag);
+      const normalized = normalizeTag(tag);
+      if (!tags.has(normalized)) {
+        tags.set(normalized, tag);
+      }
     });
   });
   const sorted = sortByPublishedDate(posts);
@@ -37,7 +41,12 @@ export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
   const pages = range(maxPageNumer);
 
   return {
-    props: { posts: sliced, currentPage, pages, tags: Array.from(tags).sort() },
+    props: {
+      posts: sliced,
+      currentPage,
+      pages,
+      tags: Array.from(tags.values()).sort(),
+    },
   };
 };
 
