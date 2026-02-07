@@ -12,6 +12,7 @@
 /.next/
 /out/
 /storybook-static/
+/public/og-images/
 
 # production
 /build

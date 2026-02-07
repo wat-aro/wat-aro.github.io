@@ -7,10 +7,10 @@ const generateOgImages = async () => {
 
   const posts = await PostRepository.list();
 
-  Promise.all(
-    posts.slice(Number(start), Number(end)).map((post) => {
-      takeScreenshot({ title: post.title, slug: post.slug });
-    })
+  await Promise.all(
+    posts
+      .slice(Number(start), Number(end))
+      .map((post) => takeScreenshot({ title: post.title, slug: post.slug }))
   );
 };
 

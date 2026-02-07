@@ -7,14 +7,14 @@ This repository is a statically exported Next.js site.
 - `components/`: reusable UI components, usually organized as `components/<PascalCase>/index.tsx`.
 - `lib/`: content loading, markdown/rehype processing, path helpers, and OG image generation helpers.
 - `contents/`: markdown sources (`contents/posts/`, `contents/slides/`, `contents/about.md`).
-- `public/`: static assets, including pre-generated OG images under `public/og-images/`.
+- `public/`: static assets. OG images are generated into `public/og-images/` during export.
 - `scripts/`: TypeScript scripts for generating OG images.
 - `stories/`: Storybook stories and demo assets.
 
 ## Build, Test, and Development Commands
 - `yarn`: install dependencies.
 - `yarn dev`: start local dev server on port `3000`.
-- `yarn lint`: run Next.js ESLint checks (`next/core-web-vitals`).
+- `yarn lint`: run ESLint with the flat config (`eslint.config.mjs`).
 - `yarn build`: build production bundle.
 - `yarn export`: generate OG images, build, then export static files to `out/`.
 - `yarn storybook`: run Storybook on port `6006`.
