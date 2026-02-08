@@ -33,6 +33,9 @@ jobs:
       - name: install
         run: pnpm install --frozen-lockfile
 
+      - name: typecheck
+        run: pnpm exec tsc --noEmit
+
       - name: detect playwright version
         id: playwright-version
         shell: bash
