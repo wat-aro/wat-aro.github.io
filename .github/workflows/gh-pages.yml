@@ -44,11 +44,10 @@ jobs:
         run: |
           before_sha="${{ github.event.before }}"
           after_sha="${{ github.sha }}"
-          cache_hit="${{ steps.og-image-cache.outputs.cache-hit }}"
 
           if [[ "$before_sha" == "0000000000000000000000000000000000000000" ]]; then
             echo "slugs=" >> "$GITHUB_OUTPUT"
-            echo "force_all=true" >> "$GITHUB_OUTPUT"
+            echo "force_all=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
 
@@ -61,7 +60,7 @@ jobs:
               | wc -l
           )"
 
-          if [[ "$changed_og_templates_count" -gt 0 ]] || [[ "$cache_hit" != "true" ]]; then
+          if [[ "$changed_og_templates_count" -gt 0 ]]; then
             echo "force_all=true" >> "$GITHUB_OUTPUT"
           else
             echo "force_all=false" >> "$GITHUB_OUTPUT"
@@ -73,7 +72,7 @@ jobs:
         run: pnpm run export
         env:
           FORCE_OG_IMAGE_SLUGS: ${{ steps.changed-posts.outputs.slugs }}
-          FORCE_REGENERATE_OG_IMAGES: ${{ steps.changed-posts.outputs.force_all }}
+          FORCE_REGENERATE_OG_IMAGES: ${{ steps.changed-posts.outputs.force_all == 'true' || steps.og-image-cache.outputs.cache-hit != 'true' }}
 
       - name: save og image cache
         if: always()
