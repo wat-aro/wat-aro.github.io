@@ -10,6 +10,8 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: setup pnpm
         uses: pnpm/action-setup@v4
@@ -27,8 +29,57 @@ jobs:
       - name: playwright install
         run: pnpm exec playwright install chromium
 
+      - name: restore og image cache
+        id: og-image-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: public/og-images
+          key: ${{ runner.os }}-og-images-${{ hashFiles('lib/ogimage/**', 'scripts/generate-og-image.ts', 'scripts/generate-og-images.ts') }}-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-og-images-${{ hashFiles('lib/ogimage/**', 'scripts/generate-og-image.ts', 'scripts/generate-og-images.ts') }}-
+
+      - name: detect posts with changed titles
+        id: changed-posts
+        shell: bash
+        run: |
+          before_sha="${{ github.event.before }}"
+          after_sha="${{ github.sha }}"
+
+          if [[ "$before_sha" == "0000000000000000000000000000000000000000" ]]; then
+            echo "slugs=" >> "$GITHUB_OUTPUT"
+            echo "force_all=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          changed_post_slugs="$(
+            pnpm exec ts-node --project scripts.tsconfig.json scripts/changed-og-slugs.ts "$before_sha" "$after_sha"
+          )"
+
+          changed_og_templates_count="$(
+            git diff --name-only "$before_sha" "$after_sha" -- lib/ogimage/ scripts/generate-og-image.ts scripts/generate-og-images.ts \
+              | wc -l
+          )"
+
+          if [[ "$changed_og_templates_count" -gt 0 ]]; then
+            echo "force_all=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "force_all=false" >> "$GITHUB_OUTPUT"
+          fi
+
+          echo "slugs=$changed_post_slugs" >> "$GITHUB_OUTPUT"
+
       - name: export
         run: pnpm run export
+        env:
+          FORCE_OG_IMAGE_SLUGS: ${{ steps.changed-posts.outputs.slugs }}
+          FORCE_REGENERATE_OG_IMAGES: ${{ steps.changed-posts.outputs.force_all }}
+
+      - name: save og image cache
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: public/og-images
+          key: ${{ steps.og-image-cache.outputs.cache-primary-key }}
 
       - name: add nojekyll
         run: touch ./out/.nojekyll
