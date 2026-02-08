@@ -44,10 +44,11 @@ jobs:
         run: |
           before_sha="${{ github.event.before }}"
           after_sha="${{ github.sha }}"
+          cache_hit="${{ steps.og-image-cache.outputs.cache-hit }}"
 
           if [[ "$before_sha" == "0000000000000000000000000000000000000000" ]]; then
             echo "slugs=" >> "$GITHUB_OUTPUT"
-            echo "force_all=false" >> "$GITHUB_OUTPUT"
+            echo "force_all=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
 
@@ -60,7 +61,7 @@ jobs:
               | wc -l
           )"
 
-          if [[ "$changed_og_templates_count" -gt 0 ]]; then
+          if [[ "$changed_og_templates_count" -gt 0 ]] || [[ "$cache_hit" != "true" ]]; then
             echo "force_all=true" >> "$GITHUB_OUTPUT"
           else
             echo "force_all=false" >> "$GITHUB_OUTPUT"
