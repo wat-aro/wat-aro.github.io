@@ -1,6 +1,6 @@
 import { Plugin } from 'unified';
 import { visit } from 'unist-util-visit';
-import { Element, ElementContent } from 'hast';
+import type { Element, ElementContent } from 'hast';
 
 export const rehypeHatenaCodeBlock: Plugin = () => {
   return (tree) => {
