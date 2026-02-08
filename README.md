@@ -5,6 +5,19 @@ https://wat-aro.dev
 ## Setup
 
 ```
-docker-compose build
-docker-compose run --rm app pnpm install
+pnpm install
+pnpm dev
+```
+
+## Build
+
+```
+pnpm build
+```
+
+## Export (with OG images)
+
+```
+pnpm exec playwright install chromium
+pnpm export
 ```

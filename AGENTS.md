@@ -19,7 +19,7 @@ This repository is a statically exported Next.js site.
 - `pnpm export`: generate OG images, build, then export static files to `out/`.
 - `pnpm storybook`: run Storybook on port `6006`.
 - `pnpm build-storybook`: build static Storybook output.
-- Docker setup (optional): `docker-compose build` then `docker-compose run --rm app pnpm install`.
+- `pnpm exec playwright install chromium`: install browser runtime required by OG image scripts.
 
 ## Coding Style & Naming Conventions
 - Language: TypeScript with `strict: true` (`tsconfig.json`).
