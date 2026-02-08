@@ -33,6 +33,13 @@ jobs:
       - name: install
         run: pnpm install --frozen-lockfile
 
+      - name: restore playwright cache
+        id: playwright-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('pnpm-lock.yaml') }}
+
       - name: playwright install
         run: pnpm exec playwright install chromium
 
@@ -87,6 +94,13 @@ jobs:
         with:
           path: public/og-images
           key: ${{ steps.og-image-cache.outputs.cache-primary-key }}
+
+      - name: save playwright cache
+        if: always() && steps.playwright-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ steps.playwright-cache.outputs.cache-primary-key }}
 
       - name: add nojekyll
         run: touch ./out/.nojekyll
