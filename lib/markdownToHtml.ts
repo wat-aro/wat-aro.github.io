@@ -12,6 +12,10 @@ import rehypeRaw from 'rehype-raw';
 import { rehypeHatenaCodeBlock } from './rehypeHatenaCodeBlock';
 
 export const markdownToHtml = async (markdown: string) => {
+  // Security assumption:
+  // - Markdown input is trusted repository content under contents/.
+  // - This pipeline allows raw HTML via rehypeRaw + allowDangerousHtml.
+  // If untrusted input is introduced, add HTML sanitization before stringify.
   const result = await unified()
     .use(remarkParse)
     .use(remarkFrontmatter)

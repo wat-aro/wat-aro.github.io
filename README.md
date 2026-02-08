@@ -51,3 +51,9 @@ Notes:
 
 - Push to `main` triggers GitHub Pages deployment via `.github/workflows/gh-pages.yml`.
 - Weekly production dependency audit runs via `.github/workflows/security.yml` (`pnpm audit --prod`).
+
+## Security Note (Markdown)
+
+- Markdown rendering currently allows raw HTML (`rehypeRaw`, `allowDangerousHtml`).
+- This is safe only because input is trusted repository content in `contents/`.
+- Do not pass user-generated markdown without adding sanitization.
