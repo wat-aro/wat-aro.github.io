@@ -1,47 +1,59 @@
 import fs from 'fs';
 import { execFileSync } from 'child_process';
+import path from 'path';
 import matter from 'gray-matter';
 
-const beforeSha = process.argv[2];
-const afterSha = process.argv[3];
+export const changedOgSlugs = (
+  beforeSha: string,
+  afterSha: string,
+  cwd = process.cwd()
+) => {
+  const changedFiles = execFileSync(
+    'git',
+    ['diff', '--name-only', beforeSha, afterSha, '--', 'contents/posts/'],
+    { encoding: 'utf8', cwd }
+  )
+    .split('\n')
+    .map((line) => line.trim())
+    .filter((line) => line.startsWith('contents/posts/') && line.endsWith('.md'));
 
-if (!beforeSha || !afterSha) {
-  throw new Error('Usage: ts-node scripts/changed-og-slugs.ts <beforeSha> <afterSha>');
-}
+  const changedSlugs = new Set<string>();
 
-const changedFiles = execFileSync(
-  'git',
-  ['diff', '--name-only', beforeSha, afterSha, '--', 'contents/posts/'],
-  { encoding: 'utf8' }
-)
-  .split('\n')
-  .map((line) => line.trim())
-  .filter((line) => line.startsWith('contents/posts/') && line.endsWith('.md'));
+  for (const file of changedFiles) {
+    const slug = file.replace(/^contents\/posts\//, '').replace(/\.md$/, '');
 
-const changedSlugs = new Set<string>();
+    let beforeTitle: string | null = null;
+    let afterTitle: string | null = null;
 
-for (const file of changedFiles) {
-  const slug = file.replace(/^contents\/posts\//, '').replace(/\.md$/, '');
+    try {
+      const previousContent = execFileSync('git', ['show', `${beforeSha}:${file}`], {
+        encoding: 'utf8',
+        stdio: ['ignore', 'pipe', 'ignore'],
+        cwd,
+      });
+      beforeTitle = matter(previousContent).data.title ?? null;
+    } catch {}
 
-  let beforeTitle: string | null = null;
-  let afterTitle: string | null = null;
+    try {
+      const currentContent = fs.readFileSync(path.join(cwd, file), 'utf8');
+      afterTitle = matter(currentContent).data.title ?? null;
+    } catch {}
 
-  try {
-    const previousContent = execFileSync('git', ['show', `${beforeSha}:${file}`], {
-      encoding: 'utf8',
-      stdio: ['ignore', 'pipe', 'ignore'],
-    });
-    beforeTitle = matter(previousContent).data.title ?? null;
-  } catch {}
-
-  try {
-    const currentContent = fs.readFileSync(file, 'utf8');
-    afterTitle = matter(currentContent).data.title ?? null;
-  } catch {}
-
-  if (beforeTitle !== afterTitle) {
-    changedSlugs.add(slug);
+    if (beforeTitle !== afterTitle) {
+      changedSlugs.add(slug);
+    }
   }
-}
 
-process.stdout.write(Array.from(changedSlugs).join(','));
+  return Array.from(changedSlugs);
+};
+
+if (require.main === module) {
+  const beforeSha = process.argv[2];
+  const afterSha = process.argv[3];
+
+  if (!beforeSha || !afterSha) {
+    throw new Error('Usage: ts-node scripts/changed-og-slugs.ts <beforeSha> <afterSha>');
+  }
+
+  process.stdout.write(changedOgSlugs(beforeSha, afterSha).join(','));
+}

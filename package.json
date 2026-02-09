@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
+    "test:changed-og-slugs": "ts-node --project scripts.tsconfig.json scripts/changed-og-slugs.test.ts",
     "generate-ogimages": "ts-node --project scripts.tsconfig.json scripts/generate-og-images.ts",
     "generate-all-ogimages": "ts-node --project scripts.tsconfig.json scripts/generate-all-og-images.ts",
     "generate-ogimage": "ts-node --project scripts.tsconfig.json scripts/generate-og-image.ts",
